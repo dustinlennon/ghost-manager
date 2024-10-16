@@ -13,33 +13,51 @@ docker volume create --driver local \
   --opt device=/home/dnlennon/Workspace/repos/ghost-data/content \
   ghost_volume
 
-# remove volume
-docker volume rm content
-
 ```
 
 Docker image and container
 ====
 
-```bash
-export CONTAINER_USERNAME=node
+### build the image
 
+```bash
 # (re)build the docker image
 docker image build \
-  --build-arg username=$CONTAINER_USERNAME \
-  -t ghost_container .
+  -t ghost_image .
+```
 
+
+### create a container
+```bash
 # create a container
 docker run --rm -d \
   --name ghost_container \
   -p 2368:2368 \
-  --mount type=volume,source=ghost_volume,target=/home/$CONTAINER_USERNAME/server/content \
-  ghost
+  --mount type=volume,source=ghost_volume,target=/home/node/server/content \
+  ghost_image
+```
 
+### inspect the container
+
+```bash
 # inspect the container
 docker exec -i -t ghost_container /bin/sh --login 
+```
 
+
+Docker cleanup
+====
+
+### stop the container
+
+```bash
 # stop the container 
 docker stop -t 0 ghost_container
 ```
 
+### remove the volume
+
+```bash
+# remove volume
+docker volume rm content
+```

@@ -1,0 +1,16 @@
+[project]
+name = "ghost-stack"
+version = "0.0.1"
+dependencies = [
+  "nbconvert"
+]
+
+[project.entry-points."nbconvert.exporters"]
+ghost = "ghost_stack.exporters.ghost_html_exporter:GhostHTMLExporter"
+
+[build-system]
+requires = [
+  "setuptools >= 40.9.0",
+]
+build-backend = "setuptools.build_meta"
+

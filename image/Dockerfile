@@ -1,9 +1,9 @@
 FROM node:18-alpine AS ghost
 
 # The "node" user happens to have UID:1000 GID:1000, and this needs to match
-# the host system in order to to get correct ownership after the mount.  There 
-# are a few of the uid/gid flags mentioned in the mount man page but neither 
-# ext4 nor bind seem to use them.
+# the host system in order to to get correct ownership when mounting a local 
+# share.  There are a few of the uid/gid flags mentioned in the mount man 
+# page but neither ext4 nor bind seem to use them.
 ARG username=node
 
 # RUN apk upgrade --no-cache
