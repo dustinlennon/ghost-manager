@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 build = "*"
+requests = "*"
+jwt = "*"
+pyjwt = "*"
 
 [dev-packages]
 
