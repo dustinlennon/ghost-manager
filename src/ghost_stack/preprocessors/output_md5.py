@@ -31,7 +31,8 @@ class OutputMd5Preprocessor(ExtractOutputPreprocessor):
             resources["outputs"][filename] = data
 
             if self.prefix:
-              filename = "/".join([self.prefix, filename])
+              filename = f"{self.prefix}{filename}"
+              self.log.debug("filename: {filename}")
 
             out.metadata["filenames"][mime_type] = filename
 

@@ -36,7 +36,7 @@ def get_logger():
 @dataclass
 class ProgramArgs:
   notebook: str
-  _prefix: str
+  build: str
   _ghost_data_path: str
   ghost_admin_api_key: str
   post_title: Optional[str] = None
@@ -48,12 +48,12 @@ class ProgramArgs:
   
   @property
   def prefix(self):
-    if self._prefix == 'local':
+    if self.build == 'local':
       prefix = ""
-    elif self._prefix == 'dev':
-      prefix = "http://localhost:2368"
+    elif self.build == 'dev':
+      prefix = "/"
     else:
-      prefix = "https://dlennon.org/ghost"
+      prefix = "https://dlennon.org/ghost/"
     return prefix
 
   @property
@@ -73,7 +73,7 @@ def get_program_args(supplied_args = None):
     prog = "publish"
   )
   parser.add_argument("notebook")
-  parser.add_argument("--prefix", choices = ['local', 'dev', 'prod'], default = 'local', dest = "_prefix")
+  parser.add_argument("--build", choices = ['local', 'dev', 'prod'], default = 'local')
   parser.add_argument("--ghost-data-path", default = os.environ["GHOST_DATA_PATH"], dest = "_ghost_data_path")
   parser.add_argument("--ghost-admin-api-key", default = os.environ["GHOST_ADMIN_API_KEY"])
   parser.add_argument("--post-title")
@@ -137,9 +137,12 @@ if __name__ == '__main__':
   # logger.setLevel(10)  
 
   # test_args = shlex.split("hessenberg --post-title 'Hello World' --post-date 2020-01-01 ")
-  args = get_program_args(["hessenberg"])
+  args = get_program_args()
   config = get_config(args)
   body, resources = convert(config, args)
+
+  if args.build == "local":
+    sys.exit(0)
 
   # postprocess yaml header metadata
   header = resources['yaml_header']
