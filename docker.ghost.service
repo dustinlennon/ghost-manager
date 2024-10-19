@@ -1,0 +1,24 @@
+
+# To create links:
+# $ sudo systemctl enable /home/deploy/ghost/docker.ghost.service
+
+# To restart the service
+# systemctl daemon-reload && systemctl restart docker.ghost.service
+
+[Unit]
+Description=Ghost Blog
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=forking
+TimeoutStartSec=infinity
+Restart=always
+PIDFile=/home/deploy/ghost/ghost-stack/ghost.pid
+WorkingDirectory=/home/deploy/ghost/ghost-stack
+ExecStartPre=-/home/deploy/ghost/ghost-stack/teardown.sh
+ExecStart=/home/deploy/ghost/ghost-stack/startup.sh
+
+[Install]
+WantedBy=default.target
+
