@@ -36,6 +36,8 @@ RUN ghost setup --db sqlite3 --port 2368 --ip 0.0.0.0 --url $ENDPOINT --process 
 
 # # # TODO: maybe mv instead of rm?
 RUN rm -rf /home/ghost/server/content
+# RUN mkdir -p /home/ghost/archive
+# RUN mv /home/ghost/server/content /home/ghost/archive/content
 VOLUME /home/ghost/server/content
 
 # keepalive (for developing)
