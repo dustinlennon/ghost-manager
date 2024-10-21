@@ -1,0 +1,56 @@
+<!-- highlightjs -->
+<link rel="stylesheet" href="/content/files/papercolor-light.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  hljs.configure({
+    languages: ["python", "R"]
+  });
+  hljs.highlightAll();
+</script>
+
+<style>
+  /* The font-size seems to be the reason for the gaps between code blocks! */
+  div.input, div.output {
+    font-size: 0.1em;
+  }
+  
+  div.input {
+    margin-top: 15px;
+  }
+
+  div.input pre, div.output pre{
+    padding: 0;
+    margin: 0;
+  }
+  div.input + div.output {
+    margin-top: 0;
+  }
+
+  div.input pre {
+    background-color:#f8fbff;
+  }  
+  div.input code.hljs {
+    background-color:#f1f7ff;
+  }  
+  
+  div.output pre {
+    background-color:#fffcf8;
+  }  
+  div.output code.hljs {
+    background-color:#fff8f1;
+  }  
+
+  /* This removes the gap at the top; -1.5em because another block sets line-height to 1.5em */
+  div.input pre > code {
+      white-space: pre;
+      margin-top: -1.5em;
+      display: block;
+  }
+
+  /* Removes Header Button */
+  .nav-sign-up {
+      display: none!important;
+  }
+  
+</style>
+
