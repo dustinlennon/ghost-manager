@@ -2,7 +2,7 @@ PS1='(ghostpub) ${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m
 
 # handy for creating featured images
 function feature {
-    convert $1 -resize 1200x600 -gravity center -extent 1200x600 feature.png
+    convert $1.$2 -resize 1200x600 -gravity center -extent 1200x600 feature.$2
 }
 
 # this may be useful as a custom exit hook

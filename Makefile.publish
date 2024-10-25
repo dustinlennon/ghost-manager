@@ -1,6 +1,6 @@
 # Markdown to html
 %.status : %.html
 	ghostpub-post $(NOTEBOOK)
-	scp -r images $(SSH_URL)/images > /dev/null 2>&1 || true
+	scp -r images $(SSH_URL) > /dev/null 2>&1 || true
 
 all: $(TARGET)	
