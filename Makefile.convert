@@ -1,0 +1,28 @@
+RPATH := /images
+
+define relink =
+	pandoc \
+		--from html+raw_html \
+		--filter ghostpub-relink \
+		--no-highlight \
+		--metadata=rpath:$(RPATH)/$(NOTEBOOK) \
+		--metadata=src_pth:$(shell pwd) \
+		--output $@ \
+		_$@
+endef
+
+# Markdown to html
+%.html : %.md
+	ghostpub-split $<
+	pandoc --from markdown --to html --no-highlight _$< --mathjax --output _$@
+	$(relink)
+
+# Notebook to html
+%.html : %.ipynb
+	jupyter nbconvert --to ghost \
+		--output _$@ \
+		$<
+	$(relink)
+
+
+all: $(TARGET)	

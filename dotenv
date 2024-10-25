@@ -1,0 +1,4 @@
+PATH=${HOME}/Workspace/repos/ghost-publish/.venv/bin:${PATH}
+GHOST_ADMIN_API_KEY=<your ghost_admin_api_key>
+GHOST_ADMIN_API_URL=<your ghost_admin_api_url>
+SSH_URL=<the content directory served by ghost, images will be copied here>

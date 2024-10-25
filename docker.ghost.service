@@ -1,12 +1,20 @@
-
+# This deployment assumes that the host machine sets up systemd services through the 
+# `deploy` account, and that /home/deploy/ghost/ghost-manager exists and contains 
+# the startup.sh and teardown.sh scripts.  Moreover, a ghost user and ghost group will
+# need to have been set up with UID/GID matching those in the container, and the deploy 
+# user will need to be a member of the ghost group.
+#
+# Another recommendation is to create a /home/deploy/ghost/ghost-data directory.  This
+# will contain the contents folder that docker will mount in the container.
+#
 # To create links:
 # $ sudo systemctl enable /home/deploy/ghost/docker.ghost.service
-
+#
 # To restart the service
 # systemctl daemon-reload && systemctl restart docker.ghost.service
 
 [Unit]
-Description=Ghost Blog
+Description=Ghost Manager
 After=docker.service
 Requires=docker.service
 
@@ -14,10 +22,10 @@ Requires=docker.service
 Type=forking
 TimeoutStartSec=infinity
 Restart=always
-PIDFile=/home/deploy/ghost/ghost-stack/ghost.pid
-WorkingDirectory=/home/deploy/ghost/ghost-stack
-ExecStartPre=-/home/deploy/ghost/ghost-stack/teardown.sh
-ExecStart=/home/deploy/ghost/ghost-stack/startup.sh
+PIDFile=/home/deploy/ghost/ghost-manager/ghost.pid
+WorkingDirectory=/home/deploy/ghost/ghost-manager
+ExecStartPre=-/home/deploy/ghost/ghost-manager/teardown.sh
+ExecStart=/home/deploy/ghost/ghost-manager/startup.sh
 
 [Install]
 WantedBy=default.target

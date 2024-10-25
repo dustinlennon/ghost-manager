@@ -1,6 +1,8 @@
 #!/bin/bash -e
 
 GHOST_CONTENT_PATH=${GHOST_CONTENT_PATH:-/home/deploy/ghost/ghost-data/content}
+GHOST_ENDPOINT=${GHOST_ENDPOINT:-https://your-host.com/}
+
 echo creating volume $GHOST_CONTENT_PATH
 docker volume create --driver local \
   --opt type=ext4 \
@@ -8,7 +10,6 @@ docker volume create --driver local \
   --opt device=$GHOST_CONTENT_PATH \
   ghost_volume
 
-GHOST_ENDPOINT=${GHOST_ENDPOINT:-https://dlennon.org/posts/}
 echo creating container: $GHOST_ENDPOINT
 docker image build \
   --build-arg ENDPOINT=$GHOST_ENDPOINT \
@@ -24,10 +25,10 @@ docker run \
 
 # Capure the PID
 PID=$!
-echo $PID > /home/deploy/ghost/ghost-stack/ghost.pid
+echo $PID > /home/deploy/ghost/ghost-manager/ghost.pid
 
 # Wait until we can successfully hit the endpoint.  Again, this is for systemd, because it blocks
 # only until the process that launches the daemon (i.e., this script) terminates.
-until curl --output /dev/null --silent --head --fail http://localhost:2368/posts; do
+until curl --output /dev/null --silent --head --fail http://localhost:2368/; do
   sleep 1
 done
