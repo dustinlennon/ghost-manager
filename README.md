@@ -3,7 +3,7 @@
 ghost-manager
 ====
 
-`ghost-manager` is a repo that catalogues the config / tools I'm currently using to manage my Ghost blog.  This runs in a Docker container on a separate machine using systemd to install the blog as a service.  I use letsencrypt for ssl cert.  Apache handles the SSL and provides a reverse proxy to the Ghost blog.
+`ghost-manager` is a repo that catalogues the config / tools I'm currently using to manage my [ghost blog](https://dlennon.org).  This runs in a Docker container on a separate machine using systemd to install the blog as a service.  I use letsencrypt for ssl cert.  Apache handles the SSL and provides a reverse proxy to the Ghost blog.
 
 
 User/group setup
