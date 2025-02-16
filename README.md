@@ -27,6 +27,12 @@ Use a `.env` file to set environment variables; `dotenv` is intended to be an ea
 
 Invoke `ghostpub.sh` to set the environment.  Then run `make` within that environment.
 
+For a single post, e.g.:
+
+```bash
+make staging/20250215_rsync_mirrors/20250215_rsync_mirrors.status
+```
+
 
 ## adding a feature image
 

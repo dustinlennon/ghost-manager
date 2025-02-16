@@ -12,7 +12,9 @@ TEMP_FILES = $(foreach post_dir, $(POST_DIRS), $(wildcard $(post_dir)/_*))
 
 all: $(PUB_FILES)
 
-%.html:
+FORCE:
+
+%.html: FORCE
 	@$(MAKE) -C $(dir $@) -f ../../Makefile.convert TARGET=$(notdir $@) NOTEBOOK=$(notdir $(basename $@))
 
 %.status: %.html
